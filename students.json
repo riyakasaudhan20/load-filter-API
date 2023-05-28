@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "John Smith",
+    "totalMarks": 95
+  },
+  {
+    "id": 2,
+    "name": "Jane Doe",
+    "totalMarks": 82
+  },
+  {
+    "id": 3,
+    "name": "Michael Johnson",
+    "totalMarks": 76
+  },
+  {
+    "id": 4,
+    "name": "Emily Wilson",
+    "totalMarks": 89
+  },
+  {
+    "id": 5,
+    "name": "David Lee",
+    "totalMarks": 93
+  },
+  {
+    "id": 6,
+    "name": "Emma Thompson",
+    "totalMarks": 87
+  },
+  {
+    "id": 7,
+    "name": "Daniel Baker",
+    "totalMarks": 78
+  },
+  {
+    "id": 8,
+    "name": "Sophia Turner",
+    "totalMarks": 95
+  },
+  {
+    "id": 9,
+    "name": "William Turner",
+    "totalMarks": 81
+  },
+  {
+    "id": 10,
+    "name": "Olivia Clark",
+    "totalMarks": 92
+  },
+  {
+    "id": 11,
+    "name": "James Mitchell",
+    "totalMarks": 88
+  },
+  {
+    "id": 12,
+    "name": "Ava Adams",
+    "totalMarks": 79
+  }
+]

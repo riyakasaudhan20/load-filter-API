@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Details Grid with Filtering</title>
+  <style>
+    /* CSS styling for the grid */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Student Details Grid with Filtering</h1>
+
+  <!-- Filter input -->
+  <label for="filterInput">Filter by Name:</label>
+  <input type="text" id="filterInput" placeholder="Enter student name">
+  <button onclick="filterStudents()">Apply Filter</button>
+
+  <!-- Student details table -->
+  <table id="studentTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Total Marks</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    // Function to load student details using API
+    function loadStudentDetails() {
+      const API_URL = 'http://localhost:3000/students'; // Replace with your Student Details API endpoint URL
+
+      // Fetch the student details from the API
+      fetch(API_URL)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to retrieve student details');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const studentTable = document.getElementById('studentTable');
+          const tbody = studentTable.querySelector('tbody');
+
+          // Clear previous table data
+          tbody.innerHTML = '';
+
+          // Loop through the student details and populate the table
+          data.forEach(student => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${student.id}</td>
+              <td>${student.name}</td>
+              <td>${student.totalMarks}</td>
+            `;
+            tbody.appendChild(row);
+          });
+        })
+        .catch(error => {
+          console.error('Error loading student details:', error);
+        });
+    }
+
+    // Function to filter students using API
+    function filterStudents() {
+      const API_URL = 'http://localhost:3000/students/filter'; // Replace with your Server-side Filtering API endpoint URL
+      const filterInput = document.getElementById('filterInput');
+      const filterValue = filterInput.value;
+
+      // Prepare the filter criteria
+      const filters = { name: filterValue };
+
+      // Fetch the filtered student details from the API
+      fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ filters })
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to retrieve filtered student details');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const studentTable = document.getElementById('studentTable');
+          const tbody = studentTable.querySelector('tbody');
+
+          // Clear previous table data
+          tbody.innerHTML = '';
+
+          // Loop through the filtered student details and populate the table
+          data.forEach(student => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${student.id}</td>
+              <td>${student.name}</td>
+              <td>${student.totalMarks}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    })
+    .catch(error => {
+      console.error('Error filtering student details:', error);
+    });
+}
+
+// Load student details on page load
+document.addEventListener('DOMContentLoaded', () => {
+  loadStudentDetails();
+});
+  </script>
+</body>
+</html>
